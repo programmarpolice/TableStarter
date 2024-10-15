@@ -15,12 +15,12 @@ const seed = async (numRestaurants = 3, numCustomers = 5) => {
   const numReservations = 8;
   for (let i = 0; i < numReservations; i++) {
     const partySize = 1 + Math.floor(Math.random() * 3);
-    const party = Array.from({ length: numReservations }, () => ({
+    const party = Array.from({ length: partySize }, () => ({
       id: Math.floor(Math.random() * numCustomers + 1),
     }));
     await prisma.reservation.create({
       data: {
-        date: new Date().now().toDateString(),
+        date: new Date(Date.now()).toDateString(),
         restaurantId: 1 + Math.floor(Math.random() * numRestaurants),
         party: { connect: party },
       },
